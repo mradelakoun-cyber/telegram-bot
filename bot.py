@@ -11,7 +11,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 # ================= CONFIG =================
-API_TOKEN = os.getenv("8615451117:AAHThlA55fYeK3WpHGcs1-K0KBwnYrDFvbM")
+API_TOKEN = "8615451117:AAHThlA55fYeK3WpHGcs1-K0KBwnYrDFvbM"
 ADMIN_ID = 8364685971
 
 bot = Bot(token=API_TOKEN)
