@@ -1,6 +1,9 @@
-async def main():
-    await dp.start_polling(bot)
 import os
+
+API_TOKEN = os.getenv("BOT_TOKEN")
+
+print("TOKEN DEBUG =", repr(API_TOKEN))  # 👈 IMPORTANT (on garde pour test)
+
 import asyncio
 import json
 import random
@@ -9,9 +12,9 @@ from datetime import datetime, timedelta
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-
 # ================= CONFIG =================
-API_TOKEN = "8615451117:AAHThlA55fYeK3WpHGcs1-K0KBwnYrDFvbM"
+API_TOKEN = os.getenv("8615451117:AAHThlA55fYeK3WpHGcs1-K0KBwnYrDFvbM")
+print("TOKEN =", API_TOKEN)
 ADMIN_ID = 8364685971
 
 bot = Bot(token=API_TOKEN)
