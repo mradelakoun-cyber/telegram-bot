@@ -13,13 +13,19 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 # ================= CONFIG =================
-API_TOKEN = os.getenv("8615451117:AAHThlA55fYeK3WpHGcs1-K0KBwnYrDFvbM")
+import os
+from aiogram import Bot, Dispatcher
+
+API_TOKEN = os.getenv("API_TOKEN")
 print("TOKEN =", API_TOKEN)
+
+if not API_TOKEN:
+    raise ValueError("API_TOKEN est manquant dans Railway Variables")
+
 ADMIN_ID = 8364685971
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
-
 # ================= DATABASE USERS =================
 try:
     with open("users.json", "r") as f:
