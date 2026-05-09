@@ -2,6 +2,7 @@ import os
 API_TOKEN = os.getenv("API_TOKEN") or os.getenv("BOT_TOKEN")
 
 print("TOKEN =", API_TOKEN)
+
 import asyncio
 import json
 import random
@@ -12,7 +13,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 # ================= DEBUG ENV =================
-API_TOKEN = "8615451117:AAHO6pIOhxqJ8frnrCPQ0A_XLEhFZDbM7Ew"
+API_TOKEN = "TON_TOKEN_ICI"
 print("🔎 TOKEN DEBUG =", API_TOKEN)
 
 # ⚠️ STOP SI TOKEN ABSENT
@@ -75,12 +76,17 @@ async def save_video(message: types.Message):
 
     await message.answer("✅ Vidéo enregistrée")
 
-# ================= VIP START =================
+# ================= VIP START (MODIFIÉ UNIQUEMENT ICI) =================
 @dp.message(lambda m: m.text == "🔐 Activer VIP")
 async def vip_start(message: types.Message):
     user_id = str(message.from_user.id)
 
     users.setdefault(user_id, {"vip": False, "step": None, "data": {}})
+
+    # 🔥 AJOUT DEMANDÉ
+    if users[user_id].get("vip"):
+        await message.answer("🎉 Vous êtes actuellement en mode VIP")
+        return
 
     users[user_id]["step"] = "1win"
     save_users()
