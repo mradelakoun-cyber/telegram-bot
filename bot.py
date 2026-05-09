@@ -55,6 +55,18 @@ menu = types.ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
+# ================= TIME FUNCTION (3 MIN STEP) =================
+def next_3min_time():
+    now = datetime.now()
+
+    minutes = ((now.minute // 3) + 1) * 3
+
+    if minutes == 60:
+        now = now + timedelta(hours=1)
+        minutes = 0
+
+    return now.replace(minute=minutes, second=0, microsecond=0).strftime("%H:%M")
+
 # ================= START =================
 @dp.message(CommandStart())
 async def start(message: types.Message):
@@ -76,14 +88,13 @@ async def save_video(message: types.Message):
 
     await message.answer("✅ Vidéo enregistrée")
 
-# ================= VIP START (MODIFIÉ UNIQUEMENT ICI) =================
+# ================= VIP START =================
 @dp.message(lambda m: m.text == "🔐 Activer VIP")
 async def vip_start(message: types.Message):
     user_id = str(message.from_user.id)
 
     users.setdefault(user_id, {"vip": False, "step": None, "data": {}})
 
-    # 🔥 AJOUT DEMANDÉ
     if users[user_id].get("vip"):
         await message.answer("🎉 Vous êtes actuellement en mode VIP")
         return
@@ -117,6 +128,9 @@ async def form_flow(message: types.Message):
         users[user_id]["step"] = None
         save_users()
 
+        # ✅ AJOUT 1 : message demandé
+        await message.answer("⏳ Votre accès VIP est en cours, veuillez patienter.")
+
         data = users[user_id]["data"]
 
         keyboard = InlineKeyboardMarkup(
@@ -133,6 +147,7 @@ async def form_flow(message: types.Message):
             f"📥 DEMANDE VIP\n\n👤 {user_id}\n🆔 {data['1win']}\n📅 {data['date']}",
             reply_markup=keyboard
         )
+        return
 
 # ================= ADMIN VIP =================
 @dp.callback_query(lambda c: c.data.startswith("vip_"))
@@ -172,7 +187,8 @@ async def signal(message: types.Message):
     target = round(random.uniform(1.5, 60), 2)
     safe = round(random.uniform(1.3, 1.6), 2)
 
-    time_str = (datetime.now() + timedelta(minutes=2)).strftime("%H:%M")
+    # ✅ AJOUT 2 : heure toutes les 3 minutes
+    time_str = next_3min_time()
 
     caption = f"""🚀 SIGNAL
 
