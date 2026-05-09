@@ -13,7 +13,7 @@ from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 # ================= DEBUG ENV =================
-API_TOKEN = "TON_TOKEN_ICI"
+API_TOKEN = "8615451117:AAHO6pIOhxqJ8frnrCPQ0A_XLEhFZDbM7Ew"
 print("🔎 TOKEN DEBUG =", API_TOKEN)
 
 # ⚠️ STOP SI TOKEN ABSENT
